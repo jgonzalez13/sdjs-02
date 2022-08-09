@@ -6,6 +6,7 @@
     "app": "apps/app",
     "app-e2e": "apps/app-e2e",
     "components": "libs/components",
+    "hooks": "libs/hooks",
     "interfaces": "libs/interfaces",
     "queries": "libs/queries"
   }
