@@ -5,6 +5,7 @@
     "api": "apps/api",
     "app": "apps/app",
     "app-e2e": "apps/app-e2e",
-    "interfaces": "libs/interfaces"
+    "interfaces": "libs/interfaces",
+    "queries": "libs/queries"
   }
 }
