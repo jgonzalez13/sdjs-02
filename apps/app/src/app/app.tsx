@@ -1,17 +1,16 @@
-import tw from 'twin.macro';
+import { useTasks } from '@sdjs-02/hooks';
+import { useEffect } from 'react';
 
-const Input = tw.input`border hover:border-black`;
+export const App = () => {
+  const [{ data, loading }] = useTasks(1);
 
-export const App = () => (
-  <div tw="bg-blue-50" style={{ textAlign: 'center' }}>
-    <Input />
-    <h1>Welcome to app!</h1>
-    <img
-      width="450"
-      src="https://raw.githubusercontent.com/nrwl/nx/master/images/nx-logo.png"
-      alt="Nx - Smart, Fast and Extensible Build System"
-    />
-  </div>
-);
+  useEffect(() => {
+    console.log(data);
+  }, [data]);
+
+  if (loading) return <div>Cargando...</div>;
+
+  return <div>haola</div>;
+};
 
 export default App;
