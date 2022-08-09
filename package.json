@@ -4,15 +4,26 @@
   "license": "MIT",
   "scripts": {
     "start": "nx serve",
+    "start:app": "nx run app:serve",
+    "start:api": "nx run api:serve",
     "build": "nx build",
-    "test": "nx test"
+    "test": "nx test",
+    "postinstall": "husky install"
   },
   "private": true,
   "dependencies": {
     "@emotion/react": "11.10.0",
     "@emotion/styled": "11.10.0",
+    "apollo-server-core": "^3.10.0",
+    "apollo-server-express": "^3.10.0",
     "core-js": "^3.6.5",
     "express": "^4.18.1",
+    "graphql": "^16.5.0",
+    "graphql-compose": "^9.0.8",
+    "graphql-compose-mongoose": "^9.7.1",
+    "graphql-compose-pagination": "^8.3.0",
+    "mongodb-memory-server-core": "^8.8.0",
+    "mongoose": "^6.5.1",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "regenerator-runtime": "0.13.7",
@@ -47,12 +58,17 @@
     "eslint-plugin-jsx-a11y": "6.6.1",
     "eslint-plugin-react": "7.30.1",
     "eslint-plugin-react-hooks": "4.6.0",
+    "husky": "^8.0.1",
     "jest": "27.5.1",
+    "lint-staged": "^13.0.3",
     "nx": "14.5.4",
     "prettier": "^2.6.2",
     "react-test-renderer": "18.2.0",
     "ts-jest": "27.1.4",
     "ts-node": "~10.8.0",
     "typescript": "~4.7.2"
+  },
+  "lint-staged": {
+    "*.{ts,tsx,js,scss,css,mdx,json}": "yarn run prettier --write"
   }
 }
