@@ -1,5 +1,10 @@
+import tw from 'twin.macro';
+
+const Input = tw.input`border hover:border-black`;
+
 export const App = () => (
-  <div style={{ textAlign: 'center' }}>
+  <div tw="bg-blue-50" style={{ textAlign: 'center' }}>
+    <Input />
     <h1>Welcome to app!</h1>
     <img
       width="450"
@@ -7,6 +12,6 @@ export const App = () => (
       alt="Nx - Smart, Fast and Extensible Build System"
     />
   </div>
-)
+);
 
 export default App;
