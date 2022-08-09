@@ -4,7 +4,6 @@
   "include": [],
   "references": [
     {
-      "composite": true,
       "path": "./tsconfig.lib.json"
     },
     {

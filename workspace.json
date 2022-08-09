@@ -5,6 +5,7 @@
     "api": "apps/api",
     "app": "apps/app",
     "app-e2e": "apps/app-e2e",
+    "components": "libs/components",
     "interfaces": "libs/interfaces",
     "queries": "libs/queries"
   }

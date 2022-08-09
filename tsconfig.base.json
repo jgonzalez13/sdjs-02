@@ -15,6 +15,7 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
+      "@sdjs-02/components": ["libs/components/src/index.ts"],
       "@sdjs-02/interfaces": ["libs/interfaces/src/index.ts"],
       "@sdjs-02/queries": ["libs/queries/src/index.ts"]
     }
