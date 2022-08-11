@@ -55,6 +55,10 @@ export const App = () => {
   };
 
   useEffect(() => {
+    if ((data?.items.length || 0) < 1 && currentPage > 1) setCurrentPage(currentPage - 1);
+  }, [data?.items]);
+
+  useEffect(() => {
     setCurrentPage(1);
   }, [currentFilter]);
 
