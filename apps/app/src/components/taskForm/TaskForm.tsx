@@ -9,6 +9,7 @@ import 'twin.macro';
 interface TaskFormProps {
   isOpen: boolean;
   taskSelected: any;
+  onRemove: () => void;
   onSubmit: (values: ITask) => void;
   onCancel: () => void;
 }
@@ -17,7 +18,7 @@ export const INITIAL_TASK = { _id: '', title: '', description: '', status: 'pend
 const STATUS_DONE = 'done';
 const TASK_STATUS = ['pending', 'progress', STATUS_DONE];
 
-export const TaskForm = ({ isOpen, taskSelected, onSubmit, onCancel }: TaskFormProps) => {
+export const TaskForm = ({ isOpen, taskSelected, onRemove, onSubmit, onCancel }: TaskFormProps) => {
   const [isViewMode, setIsViewMode] = useState(true);
   const isEditTask = taskSelected._id;
   const disabledEdition = isViewMode && isEditTask;
@@ -67,7 +68,7 @@ export const TaskForm = ({ isOpen, taskSelected, onSubmit, onCancel }: TaskFormP
           <div tw="flex justify-end">
             {disabledEdition ? (
               <div>
-                <Button type="button" color="danger" tw="mr-3">
+                <Button type="button" color="danger" tw="mr-3" onClick={onRemove}>
                   delete
                 </Button>
 

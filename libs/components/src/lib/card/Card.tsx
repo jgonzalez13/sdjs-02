@@ -15,7 +15,13 @@ export const Card: any = ({ children, onClick, ...rest }: CardProps) => {
   };
 
   return (
-    <div {...rest} tw="block rounded-lg shadow-lg bg-white w-full max-w-sm">
+    <div
+      {...rest}
+      tw="block rounded-lg shadow-lg bg-white w-full max-w-sm"
+      css={`
+        min-width: 400px;
+      `}
+    >
       <a href="#card" tw="flex justify-center" onClick={handleOnClick}>
         <div tw="p-6 w-full">{children}</div>
       </a>

@@ -1,26 +1,37 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect, useState } from 'react';
-import { Button, Card, Modal, Pagination } from '@sdjs-02/components';
+import { Button, Modal, Pagination } from '@sdjs-02/components';
 import { useTasks, useToggle } from '@sdjs-02/hooks';
 import { ITask } from '@sdjs-02/interfaces';
-import { Filter, TaskForm, INITIAL_TASK } from '../components';
+import { Filter, RemoveModal, TaskForm, Tasks, INITIAL_TASK } from '../components';
 import 'twin.macro';
 
 export const App = () => {
   const [currentFilter, setCurrentFilter] = useState<string>('');
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [{ data, loading, errorMessage }, actionsTask] = useTasks(currentPage, currentFilter);
-  const [isOpen, toggleIsOpen] = useToggle();
+  const [isOpenEditModal, toggleIsOpenEditModal] = useToggle();
+  const [isOpenRemoveModal, toggleIsOpenRemoveModal] = useToggle();
   const [taskSelected, setTaskSelected] = useState<ITask>(INITIAL_TASK);
 
   const onAddNewTask = () => {
     if (taskSelected) setTaskSelected(INITIAL_TASK);
-    toggleIsOpen();
+    toggleIsOpenEditModal();
   };
 
   const onSelectTask = (task: ITask) => {
     setTaskSelected(task);
-    toggleIsOpen();
+    toggleIsOpenEditModal();
+  };
+
+  const onRemoveTask = () => {
+    actionsTask.remove({
+      variables: {
+        filter: {
+          _id: taskSelected._id,
+        },
+      },
+    });
   };
 
   const onSubmitForm = async (values: ITask) => {
@@ -49,11 +60,14 @@ export const App = () => {
   }, [currentFilter]);
 
   useEffect(() => {
-    if (isOpen && !loading) toggleIsOpen();
+    if (!loading) {
+      if (isOpenEditModal) toggleIsOpenEditModal();
+      if (isOpenRemoveModal) toggleIsOpenRemoveModal();
+    }
   }, [loading]);
 
   return (
-    <div tw="flex flex-col items-center justify-center w-full h-screen p-5">
+    <div tw="flex flex-col items-center justify-center w-full h-screen p-16">
       {errorMessage && <div tw="bg-red-600 text-white p-2 mb-5">{errorMessage}</div>}
 
       <div tw="mb-5">
@@ -64,21 +78,28 @@ export const App = () => {
 
       <Filter currentFilter={currentFilter} setCurrentFilter={setCurrentFilter} />
 
-      {data?.items.map((task) => (
-        <Card key={task['_id']} tw="mb-5" onClick={() => onSelectTask(task)}>
-          <Card.Title tw="mb-6">{task.title}</Card.Title>
-
-          <Card.Body>{task.description}</Card.Body>
-        </Card>
-      ))}
+      {data?.items && <Tasks data={data?.items} onClickTask={onSelectTask} />}
 
       {data?.pageInfo && (
         <Pagination {...data?.pageInfo} currentPage={currentPage} setCurrentPage={setCurrentPage} />
       )}
 
-      <Modal color="info" isOpen={isOpen} toggle={toggleIsOpen}>
-        <TaskForm isOpen={isOpen} taskSelected={taskSelected} onSubmit={onSubmitForm} onCancel={toggleIsOpen} />
+      <Modal color="info" isOpen={isOpenEditModal} toggle={toggleIsOpenEditModal}>
+        <TaskForm
+          isOpen={isOpenEditModal}
+          taskSelected={taskSelected}
+          onSubmit={onSubmitForm}
+          onCancel={toggleIsOpenEditModal}
+          onRemove={toggleIsOpenRemoveModal}
+        />
       </Modal>
+
+      <RemoveModal
+        isOpen={isOpenRemoveModal}
+        taskTitle={taskSelected.title}
+        toggle={toggleIsOpenRemoveModal}
+        onConfirm={onRemoveTask}
+      />
     </div>
   );
 };
