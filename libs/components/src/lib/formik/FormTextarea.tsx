@@ -14,7 +14,7 @@ export const FormTextarea = ({ name, label, disabled, ...rest }: FormTextareaPro
   const [field, meta] = useField(name);
 
   return (
-    <FormGroup error={meta.error} label={label} name={name}>
+    <FormGroup disabled={disabled} error={meta.error} label={label} name={name}>
       <TextArea {...rest} {...field} disabled={disabled} rows={5} />
     </FormGroup>
   );

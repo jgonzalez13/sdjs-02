@@ -15,7 +15,7 @@ export const FormSelect = ({ name, label, disabled, options, ...rest }: FormSele
   const [field, meta] = useField(name);
 
   return (
-    <FormGroup error={meta.error} label={label} name={name}>
+    <FormGroup disabled={disabled} error={meta.error} label={label} name={name}>
       <Select {...rest} {...field} disabled={disabled} tw="capitalize">
         {options.map((option: string) => (
           <option key={option} value={option}>

@@ -5,6 +5,7 @@ export const QUERY_TASKS = gql`
     tasks(page: $page) {
       count
       items {
+        _id
         title
         description
         status

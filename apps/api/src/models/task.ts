@@ -1,7 +1,7 @@
 import mongoose from 'mongoose';
-import { ITask } from '@sdjs-02/interfaces';
+import { ITaskMongoose } from '@sdjs-02/interfaces';
 
-export interface ITaskDocument extends ITask, mongoose.Document {}
+export interface ITaskDocument extends ITaskMongoose, mongoose.Document {}
 
 export const TaskSchema = new mongoose.Schema({
   title: {

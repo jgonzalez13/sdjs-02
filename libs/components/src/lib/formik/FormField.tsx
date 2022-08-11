@@ -13,7 +13,7 @@ export const FormField = ({ name, label, disabled, ...rest }: FormFieldProps) =>
   const [field, meta] = useField(name);
 
   return (
-    <FormGroup error={meta.error} label={label} name={name}>
+    <FormGroup disabled={disabled} error={meta.error} label={label} name={name}>
       <Input {...rest} {...field} disabled={disabled} />
     </FormGroup>
   );
