@@ -39,6 +39,7 @@ export const Pagination = ({
               {item}
             </PaginationItem>
           ))}
+
           <PaginationItem disabled={!hasNextPage} onClick={onClickNext}>
             Next
           </PaginationItem>
