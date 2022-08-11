@@ -1,13 +1,14 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect, useState } from 'react';
-import { Button, Card, Modal } from '@sdjs-02/components';
+import { Button, Card, Modal, Pagination } from '@sdjs-02/components';
 import { useTasks, useToggle } from '@sdjs-02/hooks';
 import { ITask } from '@sdjs-02/interfaces';
 import { TaskForm, INITIAL_TASK } from '../components';
 import 'twin.macro';
 
 export const App = () => {
-  const [{ data, loading, errorMessage }, actionsTask] = useTasks(1);
+  const [currentPage, setCurrentPage] = useState<number>(1);
+  const [{ data, loading, errorMessage }, actionsTask] = useTasks(currentPage);
   const [isOpen, toggleIsOpen] = useToggle();
   const [taskSelected, setTaskSelected] = useState<ITask>(INITIAL_TASK);
 
@@ -30,16 +31,16 @@ export const App = () => {
       },
     };
 
-    if (values._id)
-      actionsTask.update({
-        variables: {
-          ...variables,
-          filter: {
-            _id: values._id,
-          },
+    if (!values._id) return actionsTask.create({ variables });
+
+    return actionsTask.update({
+      variables: {
+        ...variables,
+        filter: {
+          _id: values._id,
         },
-      });
-    else actionsTask.create({ variables });
+      },
+    });
   };
 
   useEffect(() => {
@@ -63,6 +64,10 @@ export const App = () => {
           <Card.Body>{task.description}</Card.Body>
         </Card>
       ))}
+
+      {data?.pageInfo && (
+        <Pagination {...data?.pageInfo} currentPage={currentPage} setCurrentPage={setCurrentPage} />
+      )}
 
       <Modal color="info" isOpen={isOpen} toggle={toggleIsOpen}>
         <TaskForm isOpen={isOpen} taskSelected={taskSelected} onSubmit={onSubmitForm} onCancel={toggleIsOpen} />

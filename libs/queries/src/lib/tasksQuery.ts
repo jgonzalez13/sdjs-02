@@ -11,7 +11,7 @@ export const QUERY_TASKS = gql`
         status
       }
       pageInfo {
-        currentPage
+        pageCount
         hasNextPage
         hasPreviousPage
       }

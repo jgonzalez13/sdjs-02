@@ -8,7 +8,7 @@ export interface ITask extends ITaskMongoose {
 }
 
 export interface IPageInfo {
-  currentPage: number;
+  pageCount: number;
   hasNextPage: false;
   hasPreviousPage: false;
 }
