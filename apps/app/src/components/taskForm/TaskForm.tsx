@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect, useState } from 'react';
 import { FormikProvider, useFormik } from 'formik';
 import { Button, FormField, FormSelect, FormTextarea } from '@sdjs-02/components';

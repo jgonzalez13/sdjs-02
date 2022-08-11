@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect, useState } from 'react';
 import { Button, Modal, Pagination } from '@sdjs-02/components';
 import { useTasks, useToggle } from '@sdjs-02/hooks';
