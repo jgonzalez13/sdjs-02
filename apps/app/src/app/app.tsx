@@ -48,7 +48,7 @@ export const App = () => {
 
   return (
     <div tw="flex flex-col items-center justify-center w-full h-screen p-5">
-      {errorMessage && <div tw="bg-red-600 text-white">{errorMessage}</div>}
+      {errorMessage && <div tw="bg-red-600 text-white p-2 mb-5">{errorMessage}</div>}
 
       <div tw="mb-5">
         <Button color="success" onClick={onAddNewTask}>
