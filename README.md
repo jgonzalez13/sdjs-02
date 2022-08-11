@@ -1,2 +1,2 @@
-# SDJS - 02
+# SDJS-02 Exercise
 
