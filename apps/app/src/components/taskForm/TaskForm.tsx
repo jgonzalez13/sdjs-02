@@ -49,6 +49,8 @@ export const TaskForm = ({ isOpen, taskSelected, onRemove, onSubmit, onCancel }:
       setIsViewMode(true);
       formik.setStatus(true);
     }
+
+    if (!isOpen) formik.setStatus(false);
   }, [isOpen]);
 
   return (
