@@ -32,11 +32,18 @@ interface IUseTasksResponse {
   tasks?: IUseData;
 }
 
-export const useTasks = (currentPage: number): [IUseTasksState, IUseTasksActions] => {
+export const useTasks = (currentPage: number, filterStatus: string): [IUseTasksState, IUseTasksActions] => {
   const [data, setData] = useState<IUseData>();
   const [errorMessage, setErrorMessage] = useState<string>('');
 
-  const variables = { page: currentPage };
+  const variables = {
+    page: currentPage,
+    filter: filterStatus
+      ? {
+          status: filterStatus,
+        }
+      : null,
+  };
 
   const onCompletedQuery = (response: IUseTasksResponse) => {
     setData(response?.tasks);

@@ -1,8 +1,8 @@
 import { gql } from '@apollo/client';
 
 export const QUERY_TASKS = gql`
-  query Tasks($page: Int) {
-    tasks(page: $page) {
+  query Tasks($page: Int, $filter: FilterFindManyTaskInput) {
+    tasks(page: $page, filter: $filter) {
       count
       items {
         _id

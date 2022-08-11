@@ -9,7 +9,7 @@ import 'twin.macro';
 export const App = () => {
   const [currentFilter, setCurrentFilter] = useState<string>('');
   const [currentPage, setCurrentPage] = useState<number>(1);
-  const [{ data, loading, errorMessage }, actionsTask] = useTasks(currentPage);
+  const [{ data, loading, errorMessage }, actionsTask] = useTasks(currentPage, currentFilter);
   const [isOpen, toggleIsOpen] = useToggle();
   const [taskSelected, setTaskSelected] = useState<ITask>(INITIAL_TASK);
 
@@ -45,9 +45,13 @@ export const App = () => {
   };
 
   useEffect(() => {
+    setCurrentPage(1);
+  }, [currentFilter]);
+
+  useEffect(() => {
     if (isOpen && !loading) toggleIsOpen();
   }, [loading]);
-  console.log({ currentFilter });
+
   return (
     <div tw="flex flex-col items-center justify-center w-full h-screen p-5">
       {errorMessage && <div tw="bg-red-600 text-white p-2 mb-5">{errorMessage}</div>}
